@@ -21,7 +21,8 @@ def get_stats():
         {"$limit": 10}
     ]
     top_ips = nginx.aggregate(pipeline)
-    print('IPs:')
+    if top_ips:
+        print('IPs:')
     for ip in top_ips:
         print(f"\t{ip['_id']}: {ip['count']}")
 
