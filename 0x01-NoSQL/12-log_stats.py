@@ -16,5 +16,5 @@ def get_stats():
                                  'path': '/status'}), 'status check')
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     get_stats()
