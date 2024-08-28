@@ -4,6 +4,7 @@ from pymongo import MongoClient
 
 
 def get_stats():
+    """a function that gets stats abput Nginx logs in MongoDB"""
     db = MongoClient('mongodb://127.0.0.1:27017')
     nginx = db.logs.nginx
 
