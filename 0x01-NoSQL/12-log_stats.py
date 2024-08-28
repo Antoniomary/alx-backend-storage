@@ -7,10 +7,11 @@ def get_stats():
     db = MongoClient()
     nginx = db.logs.nginx
 
-    print(nginx.count_documents(), 'logs')
+    print(nginx.count_documents({}), 'logs')
     print('Methods:')
-    for m in ["GET", "POST", "PUT", "PATCH", "DELETE"]:
-        print(f"\tmethod {m}: {nginx.count_documents({'method': '{m}'})}")
+    for method in ["GET", "POST", "PUT", "PATCH", "DELETE"]:
+        count = nginx.count_documents({'method': method})
+        print(f"\tmethod {method}: {count}")
     print(nginx.count_documents({'method': 'GET',
                                  'path': '/status'}), 'status check')
 
