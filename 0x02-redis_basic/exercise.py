@@ -27,16 +27,16 @@ class Cache:
            fn will be used to convert the data back to the desired format.
         """
         value = self._redis.get(key)
-        return fn(value) if fn else value
+        return fn(value) if value and fn else value
 
-    def get_str(self, key: str) -> str:
+    def get_str(self, key: str) -> Optional[str]:
         """converts the result of the get method
            when it is bytes to a string
         """
-        return self._redis.get(key).decode()
+        return self.get(key, lambda x: x.decode())
 
-    def get_int(self, key: str) -> int:
+    def get_int(self, key: str) -> Optional[int]:
         """converts the result of the get method
            when it is an int to an int
         """
-        return int(self._redis.get(key).decode())
+        return self.get(key, lambda x: int(x))
