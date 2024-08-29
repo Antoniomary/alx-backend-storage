@@ -7,12 +7,12 @@ import redis
 
 class Cache:
     """defines a Cache class for caching with Redis"""
-    def __init__():
+    def __init__(self):
         """constructor function"""
         self._redis = redis.Redis()
         self.redi.flushdb()
 
-    def store(data: Union[str, bytes, int, float]) -> str:
+    def store(self, data: Union[str, bytes, int, float]) -> str:
         """generate a random key (e.g. using uuid).
            It stores the input data in Redis using the random key
            and return the key.
