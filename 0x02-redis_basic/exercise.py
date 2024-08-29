@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """contains Cache class"""
-import redis
+from typing import Union
 from uuid import uuid4
+import redis
 
 
 class Cache:
