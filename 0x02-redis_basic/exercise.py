@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """contains Cache class"""
-from typing import Union, Optional
+from typing import Callable, Union, Optional
 from uuid import uuid4
 import redis
 
@@ -22,7 +22,7 @@ class Cache:
         return key
 
     def get(self, key: str,
-            fn: Optional[func] = None) -> Union[str, bytes, int, float]:
+            fn: Optional[Callable] = None) -> Union[str, bytes, int, float]:
         """take a key (str) and an optional Callable argument named fn.
            fn will be used to convert the data back to the desired format.
         """
