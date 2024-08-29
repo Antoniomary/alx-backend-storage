@@ -1,8 +1,21 @@
 #!/usr/bin/env python3
 """contains Cache class"""
+from functools import wraps
 from typing import Callable, Union, Optional
 from uuid import uuid4
 import redis
+
+
+def count_calls(method: Callable) -> Callable:
+    """returns a Callable"""
+    @wraps(method)
+    def wrapper(self, *arg, **kwarg):
+        """handles the increment each time a method is called"""
+        key = method.__qualname__
+        self._redis.incr(key)
+        return method(self, *arg, **kwarg)
+
+    return wrapper
 
 
 class Cache:
@@ -12,6 +25,7 @@ class Cache:
         self._redis = redis.Redis()
         self._redis.flushdb()
 
+    @count_calls
     def store(self, data: Union[str, bytes, int, float]) -> str:
         """generate a random key (e.g. using uuid).
            It stores the input data in Redis using the random key
