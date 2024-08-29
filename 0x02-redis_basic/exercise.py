@@ -21,8 +21,8 @@ class Cache:
         self._redis.set(key, data)
         return key
 
-    def get(self, key: str, fn: Optional[func] = None) -> Union[str, bytes,
-                                                                int, float]:
+    def get(self, key: str,
+            fn: Optional[func] = None) -> Union[str, bytes, int, float]:
         """take a key (str) and an optional Callable argument named fn.
            fn will be used to convert the data back to the desired format.
         """
