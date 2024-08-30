@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""contains Cache class"""
+"""contains get_page function"""
 import redis
 import requests
 
