@@ -14,13 +14,13 @@ def get_page(url: str) -> str:
     cache_result = cache.get(key_cache)
 
     key_count = f"count:{url}"
-    cache.incr(key_count)
+    cache.setex(key_count, 10, cache.incr(key_count))
 
     if cache_result:
         return cache_result.decode()
 
     response = requests.get(url)
-    cache.setex(key_cache, 10, response.text)
+    cache.setex(key_count, 10, response.text)
 
     return response.text
 
