@@ -12,14 +12,15 @@ def get_page(url: str) -> str:
 
     key_cache = f"cache:{url}"
     cache_result = cache.get(key_cache)
+
+    key_count = f"count:{url}"
+    cache.incr(key_count)
+
     if cache_result:
         return cache_result.decode()
 
     response = requests.get(url)
     cache.setex(key_cache, 10, response.text)
-
-    key_count = f"count:{url}"
-    cache.incr(key_count)
 
     return response.text
 
